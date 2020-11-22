@@ -6,7 +6,6 @@ import './HomeHeader.scss';
 
 class HomeHeader extends Component {
 
-  // Compare the item genres with the genre list and returns genre names
   handleGetGenre = genreId => {
     let mainGenre;
     if (this.props.movieGenres.genres) {
