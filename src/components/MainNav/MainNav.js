@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import toggleNav from '../../actions/toggleNav';
 
-import logo from '../../images/logo.png';
+import logo from '../../images/TMDBLogo.svg';
 import './MainNav.scss';
 
 class MainNav extends Component {
