@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route,} from 'react-router-dom';
 
 import { postMDBConfig } from '../../actions/PostMDBConfigAction';
 import postMovieGenres from '../../actions/movieActions/postMovieGenres';
@@ -34,17 +34,6 @@ class App extends Component {
             <Route path="/search-results/:id" exact component={SearchResults} />
             <Route path="/discover" exact component={Discover} />
 
-            <Switch>
-
-              {/* Hanlde routing for authentication */}
-              <Route path="/log-in" exact component={UserLogIn} />
-              <Route path="/profile/:status" exact component={UserProfile} />
-
-              {!this.props.logInStatus || this.props.session.failure  ? <Redirect from='/profile' to="/log-in" /> : <Redirect from='/profile' to='/profile/approved' /> }
-              {!this.props.logInStatus || this.props.session.failure  ? <Redirect from='/profile/approved' to="/log-in" /> : <Redirect from='/log-in' to='/profile/approved' /> }
-              {!this.props.logInStatus === 'GUEST'  ? <Redirect from='/log-in' to='/profile/guest' /> : <Redirect from='/profile/guest' to="/log-in" /> }
-
-            </Switch>
 
           </div>
         </ScrollToTop>
