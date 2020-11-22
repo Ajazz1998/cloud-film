@@ -14,8 +14,7 @@ const MainFooter = () => {
           <h2 className="main-footer-top-header__title wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.2s">FILM CLOUD</h2>
           <nav className="main-footer-top-header-nav">
             <Link className="wow fadeInLeft" data-wow-delay=".7s" data-wow-duration="1.2s" to="/">Home</Link>
-            <Link className="wow fadeInLeft" data-wow-delay=".9s" data-wow-duration="1.2s" to="/log-in">Profile</Link>
-            <Link className="wow fadeInLeft" data-wow-delay="1.1s" data-wow-duration="1.2s" to="/discover">Discover</Link>
+            <Link className="wow fadeInLeft" data-wow-delay=".9s" data-wow-duration="1.2s" to="/">Profile</Link>
           </nav>
         </header>
 
