@@ -7,9 +7,6 @@ import postMovieGenres from '../../actions/movieActions/postMovieGenres';
 import postTVGenres from '../../actions/TVActions/postTVGenres';
 
 import Home from '../Home/Home';
-import UserLogIn from '../UserLogIn/UserLogIn';
-import UserProfile from '../UserProfile/UserProfile';
-import Discover from '../Discover/Discover';
 
 import ItemDetails from '../ItemDetails/ItemDetails';
 import SearchResults from '../SearchResults/SearchResults';
@@ -32,7 +29,6 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/details/:type/:id" exact component={ItemDetails} />
             <Route path="/search-results/:id" exact component={SearchResults} />
-            <Route path="/discover" exact component={Discover} />
 
 
           </div>

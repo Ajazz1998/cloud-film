@@ -81,7 +81,7 @@ class MainNav extends Component {
           </button>
         </Link>
 
-        <Link to={'/profile'}>
+        <Link to={'/'}>
           <button className="main-nav-bottom-section__button">
               {profileIcon}
           </button>
