@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import getMovieDetails from '../../actions/movieActions/getMovieDetails';
 import getMovieCredits from '../../actions/movieActions/getMovieCredits';
-import getMovieTrailers from '../../actions/movieActions/getMovieTrailers';
-import getMovieReviews from '../../actions/movieActions/getMovieReviews';
 
 import getTVDetails from '../../actions/TVActions/getTVDetails';
 import getTVCredits from '../../actions/TVActions/getTVCredits';
-import getTVTrailers from '../../actions/TVActions/getTVTrailers';
-import getTVReviews from '../../actions/TVActions/getTVReviews';
-
-import getPeopleDetails from '../../actions/peopleActions/getPeopleDetails';
-import getPeopleCombinedCredits from '../../actions/peopleActions/getPeopleCombinedCredits';
 
 import StarRating from '../StarRating/StarRating';
 import PeopleCarousel from '../PeopleCarousel/PeopleCarousel';
-import TrailerCarousel from '../TrailerCarousel/TrailerCarousel';
 import Loader from '../Loader/Loader';
+import MainFooter from '../MainFooter/MainFooter';
+
 
 import './ItemDetails.scss';
 
@@ -43,22 +36,15 @@ class ItemDetails extends Component {
 
       this.props.getMovieDetails(`https://api.themoviedb.org/3/movie/${id}?api_key=${this.props.apiKey}&language=en-US`);
       this.props.getMovieCredits(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.props.apiKey}&language=en-US`);
-      this.props.getMovieTrailers(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${this.props.apiKey}&language=en-US`);
-      this.props.getMovieReviews(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.props.apiKey}&language=en-US`);
+
 
     } else if (type === 'tv') {
 
       this.props.getTVDetails(`https://api.themoviedb.org/3/tv/${id}?api_key=${this.props.apiKey}&language=en-US`);
       this.props.getTVCredits(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${this.props.apiKey}&language=en-US`);
-      this.props.getTVTrailers(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${this.props.apiKey}&language=en-US`);
-      this.props.getTVReviews(`https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${this.props.apiKey}&language=en-US`);
 
-    } else if (type === 'people') {
 
-      this.props.getPeopleDetails(`https://api.themoviedb.org/3/person/${id}?api_key=${this.props.apiKey}&language=en-US`);
-      this.props.getPeopleCombinedCredits(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${this.props.apiKey}&language=en-US`);
-
-    }
+    } 
 
   }
 
@@ -165,31 +151,14 @@ class ItemDetails extends Component {
               <div className="item-details-header-info-container-account-warning item-details-header-info-container-account-warning--hide">
                 <p>Use a TDMB account to use this feature</p>
               </div>
+
+ 
             </div>
 
           </div>
         );
 
-      case 'people':
-        return (
-          <div className="item-details-header-info-container">
-            <img className="item-details-header-info-container-image" src={this.props.MDBConfig.images ? this.props.MDBConfig.images.secure_base_url +  this.props.MDBConfig.images.poster_sizes[0] + `${this.props.peopleDetails ? this.props.peopleDetails.profile_path : ''}` : ''} alt={this.props.peopleDetails ? this.props.peopleDetails.name : ''} />
-
-            <div className="item-details-header-info-container-content">
-              <h1 className="item-details-header-info-container-content__title">{this.props.peopleDetails ? this.props.peopleDetails.name : ''}</h1>
-
-              <div className="item-details-header-info-container-content-rating">
-                <p className="item-details-header-info-container-content-rating__digit">{this.props.peopleDetails ? Math.round(this.props.peopleDetails.popularity) : ''}</p>
-                <StarRating className="item-details-header-info-container-content-rating__stars" rating={this.props.peopleDetails ? this.props.peopleDetails.popularity : ''}  itemType="people" itemId={this.props.peopleDetails.id} />
-              </div>
-
-              <p className="item-details-header-info-container-content__detail">{this.props.peopleDetails ? `${this.props.peopleDetails.gender === 1 ? 'Female' : 'Male'}` : ''} | {this.props.peopleDetails ? this.props.peopleDetails.known_for_department : ''}</p>
-              <p className="item-details-header-info-container-content__genre">{this.props.peopleDetails.birthday ? this.formatYearOfBirth(this.props.peopleDetails.birthday) + ' | ' + this.findAge(this.props.peopleDetails.birthday) + ' yo' : ''}</p>
-
-            </div>
-
-          </div>
-        );
+     
       default:
         return null;
     }
@@ -212,14 +181,6 @@ class ItemDetails extends Component {
           <div className="item-details-main-summary">
             <h2 className="item-details-main-summary__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Summary</h2>
             <p className="item-details-main-summary__content">{this.props.TVDetails.overview ? `${this.props.TVDetails.overview.length > 0 ? this.props.TVDetails.overview : 'Overview not found'}` : ''}</p>
-          </div>
-        );
-
-      case 'people':
-        return(
-          <div className="item-details-main-summary">
-            <h2 className="item-details-main-summary__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Biography</h2>
-            <p className="item-details-main-summary__content">{this.props.peopleDetails.biography ? this.shortText(this.props.peopleDetails.biography, 100) : ''}</p>
           </div>
         );
 
@@ -248,137 +209,14 @@ class ItemDetails extends Component {
           </div>
         );
 
-      case 'people':
-        return null;
-
       default:
         return null;
     }
   }
 
-  // Returns trailers based on media type details
-  ItemDetailsMainTrailers = type => {
-    switch (type) {
+  
 
-      case 'movie':
-        return(
-          <div className="item-details-main-trailers">
-            <h2 className="item-details-main-trailers__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Trailers</h2>
-            {this.props.movieTrailers.results.length > 0 ?
-              <TrailerCarousel movieTrailers={this.props.movieTrailers} />
-              :
-              <h3 className="item-details-main-trailers__error">No trailers found :(</h3>
-            }
-          </div>
-        );
-
-      case 'tv':
-        return(
-          <div className="item-details-main-trailers">
-            <h2 className="item-details-main-trailers__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Trailers</h2>
-            {this.props.TVTrailers.results.length > 0 ?
-              <TrailerCarousel movieTrailers={this.props.TVTrailers} />
-              :
-              <h3 className="item-details-main-trailers__error">No trailers found :(</h3>
-            }
-          </div>
-        );
-
-      case 'people':
-        return null;
-
-      default:
-        return null;
-    }
-  }
-
-  // Returns reviews based on media type details
-  ItemDetailsMainReviews = type => {
-    switch (type) {
-
-      case 'movie':
-        return(
-          <div className="item-details-main-reviews">
-            <h2 className="item-details-main-reviews__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Popular Reviews</h2>
-
-            {this.props.movieReviews.results.length > 0 ? this.props.movieReviews.results.map(review =>
-              (<div key={review.url} className="item-details-main-reviews-container">
-                <h3 className="item-details-main-reviews-container__author">{review.author}</h3>
-                <p className="item-details-main-reviews-container__content">{this.shortText(review.content)}</p>
-                <a className="item-details-main-reviews-container__link" href={review.url} target="_blank">
-                  <p>See full review</p>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"/></svg>
-                </a>
-              </div>)
-          ) :
-            (<div className="item-details-main-reviews-container">
-              <p className="item-details-main-reviews-container__error">No reviews found :(</p>
-            </div>)
-          }
-
-          </div>
-        );
-
-      case 'tv':
-        return(
-          <div className="item-details-main-reviews">
-            <h2 className="item-details-main-reviews__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Popular Reviews</h2>
-
-            {this.props.TVReviews.results.length > 0 ? this.props.TVReviews.results.map(review =>
-              (<div key={review.url} className="item-details-main-reviews-container">
-                <h3 className="item-details-main-reviews-container__author">{review.author}</h3>
-                <p className="item-details-main-reviews-container__content">{this.shortText(review.content)}</p>
-                <a className="item-details-main-reviews-container__link" href={review.url} target="_blank" rel="noopener noreferrer">
-                  <p>See full review</p>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"/></svg>
-                </a>
-              </div>)
-          ) :
-            (<div className="item-details-main-reviews-container">
-              <p className="item-details-main-reviews-container__error">No reviews found :(</p>
-            </div>)
-          }
-
-          </div>
-        );
-
-      case 'people':
-        return(
-          <div className="item-details-main-popular-roles">
-            <h2 className="item-details-main-popular-roles__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Popular Roles</h2>
-
-            {this.props.peopleCombinedCredits.cast.length > 0 ? this.props.peopleCombinedCredits.cast.map((role, index) =>
-              index < 15 ?
-              (
-                <div key={role.title} className="item-details-main-popular-roles-container">
-                  <Link to={`/details/${role.media_type}/${role.id}`}>
-                    <header className="item-details-main-popular-roles-container-header">
-                      <img className="iitem-details-main-popular-roles-container-header-image" src={this.props.MDBConfig.images ? this.props.MDBConfig.images.secure_base_url +  this.props.MDBConfig.images.poster_sizes[0] + role.poster_path : ''} alt={role.title} />
-                      <div className="item-details-main-popular-roles-container-header-info">
-                        <h3 className="item-details-main-popular-roles-container-header-info__title">{role.title}</h3>
-                        <p className="item-details-main-popular-roles-container-header-info__character">{role.character}</p>
-                      </div>
-                    </header>
-                  </Link>
-
-                  <p className="item-details-main-popular-roles-container__content">{this.shortText(role.overview)}</p>
-
-                </div>
-            )
-              : null
-          ) :
-            (<div className="item-details-main-popular-roles-container">
-              <p className="item-details-main-popular-roles-container__error">No roles found :(</p>
-            </div>)
-          }
-
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  }
+  
 
   render() {
 
@@ -416,10 +254,9 @@ class ItemDetails extends Component {
 
           {this.ItemDetailsMainSummary(this.props.match.params.type)}
           {this.ItemDetailsMainCast(this.props.match.params.type)}
-          {this.ItemDetailsMainTrailers(this.props.match.params.type)}
-          {this.ItemDetailsMainReviews(this.props.match.params.type)}
 
         </main>
+        <MainFooter />
 
         <Loader />
 
@@ -448,23 +285,16 @@ const mapStateToProps = state => ({
   TVTrailers: state.getTVTrailers,
   TVReviews: state.getTVReviews,
 
-  peopleDetails: state.getPeopleDetails,
-  peopleCombinedCredits: state.getPeopleCombinedCredits,
 });
 
 const mapDispatchToProps = dispatch => ({
   getMovieDetails: url => dispatch(getMovieDetails(url)),
   getMovieCredits: url => dispatch(getMovieCredits(url)),
-  getMovieTrailers: url => dispatch(getMovieTrailers(url)),
-  getMovieReviews: url => dispatch(getMovieReviews(url)),
 
   getTVDetails: url => dispatch(getTVDetails(url)),
   getTVCredits: url => dispatch(getTVCredits(url)),
-  getTVTrailers: url => dispatch(getTVTrailers(url)),
-  getTVReviews: url => dispatch(getTVReviews(url)),
 
-  getPeopleDetails: url => dispatch(getPeopleDetails(url)),
-  getPeopleCombinedCredits: url => dispatch(getPeopleCombinedCredits(url)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemDetails);

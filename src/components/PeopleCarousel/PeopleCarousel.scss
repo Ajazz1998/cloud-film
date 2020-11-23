@@ -3,30 +3,22 @@
 
 .people-carousel-container {
 
-  .swiper-container {
-      width: 100%;
-      height: 210px;
-      overflow: hidden;
-
-      .swiper-wrapper {
-        display: flex;
-        padding: 0 1rem;
-      }
-
-      .swiper-slide {
+      .wrapper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-row-gap: 20px;
         opacity: .8;
         text-align: center;
         transition: transform .2s;
 
-        // swiper-slide__image
-        &__image {
+        .person_container .image {
           border-radius: 10px;
-          width: 100px !important;
-          height: 150px !important;
+          width: 150px !important;
+          height: 220px !important;
         }
 
         // swiper-slide__title
-        &__title {
+        .person_container .title {
           color: rgba(255, 255, 255, 0.7);
           font-size: .8rem;
         }
@@ -40,10 +32,12 @@
         }
 
         // swiper-slide:hover
-        &:hover {
+        .person_container .image:hover, 
+        .person_container .title:hover {
           opacity: 1;
           transform: scale(1.02);
           transition: transform .2s;
+          cursor: pointer;
         }
       }
 
@@ -51,7 +45,7 @@
       .swiper-button-next {
         margin-top: -3rem;
       }
-    }
+    
 
     // people-carousel-container-error
     &-error {

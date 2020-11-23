@@ -1,9 +1,8 @@
 @import '../../styles/variables';
 
 .item-details {
-  background: $primary-color;
+  background: $tertiary-color;
   color: $primary-font-color;
-
   // item-details-header-info
   &-header-info {
     background-size: cover !important; // Used important to overide api styles
@@ -23,8 +22,22 @@
         fill: $primary-font-color;
         height: auto;
         width: 30px;
-      }
+        padding: 10px;
+        transition-duration: 500ms;
+
+}
+
+      &__icon:hover{
+        background-color: rgb(167, 1, 84);
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
+
+}
     }
+
 
     // item-details-header-info-share-buttons
     &-share-buttons {
@@ -61,7 +74,7 @@
       grid-gap: 10px;
       grid-template-columns: 100px 1fr;
       position: relative;
-
+      top: -15rem;
       // item-details-header-info-container-image
       &-image {
         border-radius: 25px;
@@ -141,6 +154,8 @@
     // item-details-main-summary
     &-summary {
       font-family: $tertiary-font;
+      margin-top: -16rem;
+      margin-bottom: 5rem;
 
       // item-details-main-summary__title
       &__title {
