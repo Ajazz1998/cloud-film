@@ -100,7 +100,6 @@ class ItemDetails extends Component {
     }
   }
 
-  // Returns header based on media type details
   ItemDetailsHeaderImage = type => {
     switch(type) {
 
