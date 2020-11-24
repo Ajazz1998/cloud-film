@@ -50,7 +50,6 @@ class Home extends Component {
   }
 
   render() {
-    // Initiates carousels
     (() => {
       const sliderEl = document.querySelectorAll('.swiper-container');
        if(!sliderEl){
