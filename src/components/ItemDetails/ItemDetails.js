@@ -164,7 +164,6 @@ class ItemDetails extends Component {
     }
   }
 
-  // Returns summary based on media type details
   ItemDetailsMainSummary = type => {
     switch (type) {
 
