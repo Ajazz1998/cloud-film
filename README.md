@@ -2,7 +2,7 @@
 
 React application to browse your favorite Movies, TV shows, and actors.
 
-[Film Cloud](http://filmcloud.xyz)
+[Film Cloud](https://kind-dijkstra-d6696a.netlify.app/)
 
 ## Getting Started
 
