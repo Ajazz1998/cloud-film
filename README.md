@@ -1,6 +1,6 @@
 # Film Cloud
 
-React application to browse your favorite Movies, TV shows, and actors.
+React application to search your favorite Movies, TV shows, and actors.
 
 [Film Cloud](https://kind-dijkstra-d6696a.netlify.app/)
 
@@ -50,10 +50,6 @@ Enjoy! :)
 * [Redux](https://redux.js.org/) - State Management
 * [SASS](https://sass-lang.com/) - CSS Pre-Processor
 * [Esri](https://www.themoviedb.org/) - Layer rendering API
-
-## Contributors
-
-* **Alan Ayala** - *Initial work* - [ABW Technologies](http://www.abwtechnologies.com/)
 
 
 ## License
